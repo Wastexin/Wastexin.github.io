@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="今天学习到了正则表达式，这不仅仅是在爬虫需要，在文字识别处理NLTK，AI智能匹配等项目中也需要，特此记录。    在python中提供了re这个库来完成整个正则表达式的实现。  一、常用的匹配规则[caption id=”attachment_66” align=”alignnone” width=”541”] 常用的匹配模式[/caption]   二、常用的匹配方法1.match() ：向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫实战（3）———正则表达式">
+<meta property="og:url" content="http://yoursite.com/2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-883-ef-bc-89-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/index.html">
+<meta property="og:site_name" content="Wastexin">
+<meta property="og:description" content="今天学习到了正则表达式，这不仅仅是在爬虫需要，在文字识别处理NLTK，AI智能匹配等项目中也需要，特此记录。    在python中提供了re这个库来完成整个正则表达式的实现。  一、常用的匹配规则[caption id=”attachment_66” align=”alignnone” width=”541”] 常用的匹配模式[/caption]   二、常用的匹配方法1.match() ：向">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wwxin.club/wp-content/uploads/2018/10/QQ截图20181015221748.jpg">
+<meta property="og:image" content="https://wwxin.club/wp-content/uploads/2018/10/QQ截图20181016104943.jpg">
+<meta property="og:updated_time" content="2019-03-18T14:56:54.336Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬虫实战（3）———正则表达式">
+<meta name="twitter:description" content="今天学习到了正则表达式，这不仅仅是在爬虫需要，在文字识别处理NLTK，AI智能匹配等项目中也需要，特此记录。    在python中提供了re这个库来完成整个正则表达式的实现。  一、常用的匹配规则[caption id=”attachment_66” align=”alignnone” width=”541”] 常用的匹配模式[/caption]   二、常用的匹配方法1.match() ：向">
+<meta name="twitter:image" content="https://wwxin.club/wp-content/uploads/2018/10/QQ截图20181015221748.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-883-ef-bc-89-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/">
+
+
+
+
+
+  <title>爬虫实战（3）———正则表达式 | Wastexin</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<!--     <a href="https://github.com/Wastexin"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_white_ffffff.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a> -->
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wastexin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">真的锅炉工，假的程序员</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-883-ef-bc-89-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wastexin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫实战（3）———正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-16T00:00:39+08:00">
+                2018-10-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-18T22:56:54+08:00">
+                2019-03-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实战训练/" itemprop="url" rel="index">
+                    <span itemprop="name">实战训练</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-883-ef-bc-89-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-883-ef-bc-89-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>今天学习到了正则表达式，这不仅仅是在爬虫需要，在文字识别处理NLTK，AI智能匹配等项目中也需要，特此记录。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>在python中提供了re这个库来完成整个正则表达式的实现。</li>
+</ul>
+<h3 id="一、常用的匹配规则"><a href="#一、常用的匹配规则" class="headerlink" title="一、常用的匹配规则"></a>一、常用的匹配规则</h3><p>[caption id=”attachment_66” align=”alignnone” width=”541”]<img src="https://wwxin.club/wp-content/uploads/2018/10/QQ截图20181015221748.jpg" alt> 常用的匹配模式[/caption]  </p>
+<h3 id="二、常用的匹配方法"><a href="#二、常用的匹配方法" class="headerlink" title="二、常用的匹配方法"></a>二、常用的匹配方法</h3><h4 id="1-match-：向它传入要匹配的字符串以及正则表达式，就可以检测这个正则表达式是否匹配表达式"><a href="#1-match-：向它传入要匹配的字符串以及正则表达式，就可以检测这个正则表达式是否匹配表达式" class="headerlink" title="1.match() ：向它传入要匹配的字符串以及正则表达式，就可以检测这个正则表达式是否匹配表达式"></a><strong>1.match() ：向它传入要匹配的字符串以及正则表达式，就可以检测这个正则表达式是否匹配表达式</strong></h4><p>match()方法会尝试从字符串的起始位置匹配正则表达式，如果匹配，就会匹配成功的结果；如果不匹配，就会返回None。 示例代码：</p>
+<pre><code>import re
+
+content = &quot;Hello world 123456789 Hello_wolrd I am Wx&quot;
+print(len(content))
+result = re.match(&apos;^Hello\s\w{5}\s\d{9}\s\w{11}&apos;,content)
+#在上述正则表达式中，可以参照常用的匹配模式
+#\s匹配任意空白字符，\w匹配任意字母，{}中的数字表示匹配的数量
+print(result)
+print(result.span())
+#span()方法可以输出匹配的范围
+</code></pre><p>输出结果：</p>
+<pre><code>41
+&lt;_sre.SRE_Match object; span=(0, 33), match=&apos;Hello world 123456789 Hello_wolrd&apos;&gt;
+(0, 33)
+</code></pre><ul>
+<li><strong>匹配目标：从字符串中提取一部分内容</strong></li>
+</ul>
+<p>可以用（）括号将想提取的字符串括号起来。()实际上标记了一个子表达式的开始和结束的位置，被标记的每个子表达式会依次对应一个分组，调用group()方法传入分组的检索即可获取提取的结果。 代码实例：</p>
+<pre><code>import re
+
+content = &quot;Hello 123456789 world Hello_wolrd I am Wx&quot;
+print(len(content))
+result = re.match(&apos;^Hello\s(\d+)\sworld&apos;,content)
+#在上述正则表达式中，可以参照常用的匹配模式
+#\s匹配任意空白字符，\w匹配任意字母，{}中的数字表示匹配的数量
+print(result)
+print(result.group())
+print(result.group(0))
+print(result.group(1))
+</code></pre><p>输出结果：</p>
+<pre><code>41
+&lt;_sre.SRE_Match object; span=(0, 21), match=&apos;Hello 123456789 world&apos;&gt;
+Hello 123456789 world
+Hello 123456789 world
+123456789
+</code></pre><p>可以看到：result.group()和result.group(0)的效果是等价的。 group()方法的第一个分组（下标为0）是匹配出来的整个字符串，后面用（）括起来的子表达式依次标号有自己的分组号。、</p>
+<ul>
+<li><strong>通用匹配：在上述的正则表达式中，出现空白字符就用\s匹配，出现数字用\d匹配，工作量很大。</strong></li>
+</ul>
+<p>通用匹配使用的是.<em>（点星）匹配：其中.（点）可以匹配任意字符（除了换行符），</em>（星）代表匹配前前面字符的无限次。 示例代码：</p>
+<pre><code>import re
+
+content = &quot;Hello 123456789 world Hello_wolrd I am Wx&quot;
+print(len(content))
+result = re.match(&apos;^Hello.*Wx$&apos;,content)
+#在中间部分我们全部用.*来代替，并在结尾加上一个结尾字符串$
+print(result)
+print(result.group())
+</code></pre><p>输出结果：</p>
+<pre><code>41
+&lt;_sre.SRE_Match object; span=(0, 41), match=&apos;Hello 123456789 world Hello_wolrd I am Wx&apos;&gt;
+Hello 123456789 world Hello_wolrd I am Wx
+</code></pre><ul>
+<li><strong>贪婪与非贪婪： </strong></li>
+</ul>
+<p>.<em>为贪婪匹配：匹配尽量多的字符。 .</em>?为非贪婪匹配：匹配尽量少的字符。</p>
+<ul>
+<li><p><strong>修饰符：可选一些标志修饰符来控制匹配的模式</strong></p>
+<p>conten = “python”<br>result = re.match(“^py.*?”,content,re.S)</p>
+</li>
+</ul>
+<p><img src="https://wwxin.club/wp-content/uploads/2018/10/QQ截图20181016104943.jpg" alt></p>
+<ul>
+<li><strong>转义匹配： 正则匹配模式的特殊字符时，在前面加反斜线转义一下 。</strong></li>
+</ul>
+<h4 id="2-search-在匹配时会扫描整个字符串，然后返回第一个成功匹配的结果。"><a href="#2-search-在匹配时会扫描整个字符串，然后返回第一个成功匹配的结果。" class="headerlink" title="2.search():在匹配时会扫描整个字符串，然后返回第一个成功匹配的结果。"></a><strong>2.search():在匹配时会扫描整个字符串，然后返回第一个成功匹配的结果。</strong></h4><p><strong>3.findall()：</strong>搜索整个字符串，然后返回正则表达式匹配的所有内容。返回结果类型为列表 <class 'list'>.所以只是获取第一个内容就可以使用search(),提取多个内容则可使用findall()。 <strong>4.sub():字符串替换。</strong>re.sub(‘\d+’,’ ‘,content):第一个参数为需替换的正则表达式匹配的字符串，第二个参数为替换的字符串，第三个参数为原字符串。</class></p>
+<h4 id="5-compile-该方法可以将正则字符串编译成正则表达式对象，可在后面的匹配中复用。"><a href="#5-compile-该方法可以将正则字符串编译成正则表达式对象，可在后面的匹配中复用。" class="headerlink" title="5.compile():该方法可以将正则字符串编译成正则表达式对象，可在后面的匹配中复用。"></a><strong>5.compile():</strong>该方法可以将正则字符串编译成正则表达式对象，可在后面的匹配中复用。</h4><pre><code>import re
+contentl =’ 2018-10-16 12:00&apos;
+content2 = &apos;2018-10-17 12:55 ’
+content3 =’ 2018-10-18 13:21&apos;
+pattern = re .compile(’\d{2}:\d{2 }’)
+resultl = re.sub(pattern, &apos; &apos;’, contentl)
+result2 = re . sub(pattern &apos; &apos;， content2)
+result3 = re.sub(pattern,&apos; &apos;, content3)
+print(result1, result2, result3)
+</code></pre></blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    wx
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="64.html" title="爬虫实战（3）———正则表达式">64.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/09/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-882-ef-bc-89-e5-a4-9a-e8-bf-9b-e7-a8-8b-e6-93-8d-e4-bd-9c/" rel="next" title="爬虫实战（2）———Python多进程操作">
+                <i class="fa fa-chevron-left"></i> 爬虫实战（2）———Python多进程操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-884-ef-bc-89-e7-88-ac-e5-8f-96-e7-8c-ab-e7-9c-bc-e7-94-b5-e5-bd-b1-e6-8e-92-e8-a1-8c-e6-a6-9c/" rel="prev" title="爬虫实战（4）———爬取猫眼电影排行榜">
+                爬虫实战（4）———爬取猫眼电影排行榜 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="wx">
+            
+              <p class="site-author-name" itemprop="name">wx</p>
+              <p class="site-description motion-element" itemprop="description">不想修空调的锅炉工不是好程序员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、常用的匹配规则"><span class="nav-number">1.</span> <span class="nav-text">一、常用的匹配规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、常用的匹配方法"><span class="nav-number">2.</span> <span class="nav-text">二、常用的匹配方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-match-：向它传入要匹配的字符串以及正则表达式，就可以检测这个正则表达式是否匹配表达式"><span class="nav-number">2.1.</span> <span class="nav-text">1.match() ：向它传入要匹配的字符串以及正则表达式，就可以检测这个正则表达式是否匹配表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-search-在匹配时会扫描整个字符串，然后返回第一个成功匹配的结果。"><span class="nav-number">2.2.</span> <span class="nav-text">2.search():在匹配时会扫描整个字符串，然后返回第一个成功匹配的结果。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-compile-该方法可以将正则字符串编译成正则表达式对象，可在后面的匹配中复用。"><span class="nav-number">2.3.</span> <span class="nav-text">5.compile():该方法可以将正则字符串编译成正则表达式对象，可在后面的匹配中复用。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wx</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wwxin.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-883-ef-bc-89-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/';
+          this.page.identifier = '2018/10/16/e7-88-ac-e8-99-ab-e5-ae-9e-e6-88-98-ef-bc-883-ef-bc-89-e6-ad-a3-e5-88-99-e8-a1-a8-e8-be-be-e5-bc-8f/';
+          this.page.title = '爬虫实战（3）———正则表达式';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wwxin.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

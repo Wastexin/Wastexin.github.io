@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端小项目 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt; &amp;lt;head&amp;gt;     &amp;lt;!-- 新 Bootstrap4 核心 CSS 文件 --&amp;gt;     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://cdn.staticfile.org/twitte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="front-end weather">
+<meta property="og:url" content="http://yoursite.com/2019/02/09/front-end-weather/index.html">
+<meta property="og:site_name" content="Wastexin">
+<meta property="og:description" content="前端小项目 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt; &amp;lt;head&amp;gt;     &amp;lt;!-- 新 Bootstrap4 核心 CSS 文件 --&amp;gt;     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://cdn.staticfile.org/twitte">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-18T14:56:54.445Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="front-end weather">
+<meta name="twitter:description" content="前端小项目 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt; &amp;lt;head&amp;gt;     &amp;lt;!-- 新 Bootstrap4 核心 CSS 文件 --&amp;gt;     &amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://cdn.staticfile.org/twitte">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/09/front-end-weather/">
+
+
+
+
+
+  <title>front-end weather | Wastexin</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<!--     <a href="https://github.com/Wastexin"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_white_ffffff.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a> -->
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wastexin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">真的锅炉工，假的程序员</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/front-end-weather/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wastexin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">front-end weather</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T18:18:03+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-18T22:56:54+08:00">
+                2019-03-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/生活杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">生活杂记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/front-end-weather/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/09/front-end-weather/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端小项目</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;!-- 新 Bootstrap4 核心 CSS 文件 --&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css&quot;&gt;
+    &lt;!-- jQuery文件。务必在bootstrap.min.js 之前引入 --&gt;
+    &lt;script src=&quot;https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;!-- popper.min.js 用于弹窗、提示、下拉菜单 --&gt;
+    &lt;script src=&quot;https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js&quot;&gt;&lt;/script&gt;
+    &lt;!-- 最新的 Bootstrap4 核心 JavaScript 文件 --&gt;
+    &lt;script src=&quot;https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;!-- 引入图标 --&gt;
+    &lt;link href=&quot;https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;!-- 自建工具 --&gt;
+    &lt;script src=&quot;../tools.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;weather.css&quot;&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Show The Local Weather&lt;/title&gt;
+&lt;/head&gt;
+&lt;!--获取ip地址借口--&gt;
+&lt;script src=&quot;http://pv.sohu.com/cityjson?ie=utf-8&quot; &gt;&lt;/script&gt;
+&lt;script&gt;
+    $(function () {
+        //获取ip地址
+        var ip = returnCitySN[&quot;cip&quot;];
+        //生成url
+        var url = &quot;http://v.juhe.cn/weather/ip?format=2&amp;&quot; +
+            &quot;key=53d7aaa2b0195e3cf0b66c6ab2fad2d2&amp;ip=&quot; + ip;
+        //生成request对象
+        var xmlhttp;
+        var response;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)
+            {
+                //response 返回string类型
+                // parseJSON转成json类型
+                response = $.parseJSON(xmlhttp.responseText);
+                //todayweather
+                $(&quot;.today-ct&quot;).text(response[&apos;result&apos;][&apos;today&apos;][&apos;city&apos;]);
+                $(&quot;.today-date&quot;).text(response[&apos;result&apos;][&apos;today&apos;][&apos;date_y&apos;]);
+                $(&quot;.today-temp&quot;).text(response[&apos;result&apos;][&apos;today&apos;][&apos;temperature&apos;]);
+                $(&quot;.today-wea&quot;).text(response[&apos;result&apos;][&apos;today&apos;][&apos;weather&apos;]);
+                $(&quot;.today-wind&quot;).text(response[&apos;result&apos;][&apos;today&apos;][&apos;wind&apos;]);
+                $(&quot;.today-zz&quot;).text(response[&apos;result&apos;][&apos;today&apos;][&apos;dressing_advice&apos;]);
+                //futureweather
+                for(var i=1; i&lt;response[&apos;result&apos;][&apos;future&apos;].length; i++){
+                    $(&quot;.future-date&quot; + i).text(response[&apos;result&apos;][&apos;future&apos;][i][&apos;date&apos;]);
+                    // console.log(response[&apos;result&apos;][&apos;future&apos;][i][&apos;date&apos;]);
+                    $(&quot;.future-temp&quot; + i).text(response[&apos;result&apos;][&apos;future&apos;][i][&apos;temperature&apos;]);
+                    // console.log(response[&apos;result&apos;][&apos;future&apos;][i][&apos;temperature&apos;]);
+                    $(&quot;.future-wea&quot; + i).text(response[&apos;result&apos;][&apos;future&apos;][i][&apos;weather&apos;]);
+                    console.log(response[&apos;result&apos;][&apos;future&apos;][i][&apos;weather&apos;]);
+                    // $(&quot;.future-wind&quot; + i).text(response[&apos;result&apos;][&apos;future&apos;][i][&apos;wind&apos;]);
+                    console.log(response[&apos;result&apos;][&apos;future&apos;][i][&apos;wind&apos;]);
+                }
+
+                // $(&quot;.today-ct&quot;).text(response[&apos;result&apos;][&apos;today&apos;][&apos;city&apos;]);
+                // console.log(response[&apos;result&apos;][&apos;sk&apos;][&apos;humidity&apos;]);
+                // console.log(response[&apos;result&apos;]);
+                // console.log(typeof response);
+
+            }
+        };
+        xmlhttp.open(&quot;GET&quot;, url,true);
+        xmlhttp.send();
+        // var xmlHttp = new XMLHttpRequest();
+
+        // console.log(url);
+        // xmlHttp.open(&quot;GET&quot;, url, true);
+        // xmlHttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);
+        // xmlHttp.send();
+        // // $(&quot;body&quot;).text(xmlHttp.responseText);
+        // console.log(xmlHttp.status);
+
+
+    })
+&lt;/script&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container-fluid &quot;&gt;
+        &lt;div class=&quot;row title &quot;&gt;
+            &lt;div class=&quot;header&quot;&gt;
+                &lt;a href=&quot;#&quot;&gt;
+                &lt;img src=&quot;https://www.juhe.cn/themes/v5/public/images/loginlogo.png&quot;&gt;
+                &lt;/a&gt;&lt;h1&gt;天气应用&lt;/h1&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;hr&gt;
+        &lt;div class=&quot;row &quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;col-md-12 text-center today&quot;&gt;
+                &lt;h4&gt;今日天气&lt;/h4&gt;
+                &lt;p&gt;城市:&lt;/p&gt;&lt;span class=&quot;today-ct&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                &lt;p&gt;日期:&lt;/p&gt;&lt;span class=&quot;today-date&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                &lt;p&gt;温度:&lt;/p&gt;&lt;span class=&quot;today-temp&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                &lt;p&gt;天气:&lt;/p&gt;&lt;span class=&quot;today-wea&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                &lt;p&gt;风向:&lt;/p&gt;&lt;span class=&quot;today-wind&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                &lt;p&gt;着装建议:&lt;/p&gt;&lt;span class=&quot;today-zz&quot;&gt;&lt;/span&gt;&lt;br&gt;
+            &lt;/div&gt;
+        &lt;hr&gt;
+        &lt;div class=&quot;row&quot;&gt;
+            &lt;div class=&quot;col-md-12 future text-center&quot;&gt;
+                &lt;h4&gt;未来6天天气&lt;/h4&gt;
+                &lt;div class=&quot;row text-left&quot;&gt;&lt;br&gt;
+                    &lt;div class=&quot;col-md-2&quot;&gt;
+                        &lt;p&gt;日期:&lt;/p&gt;&lt;span class=&quot;future-date1&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;温度:&lt;/p&gt;&lt;span class=&quot;future-temp1&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;天气:&lt;/p&gt;&lt;span class=&quot;future-wea1&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;风向:&lt;/p&gt;&lt;span class=&quot;future-wind1&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;/div&gt;
+                    &lt;div class=&quot;col-md-2&quot;&gt;
+                        &lt;p&gt;日期:&lt;/p&gt;&lt;span class=&quot;future-date2&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;温度:&lt;/p&gt;&lt;span class=&quot;future-temp2&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;天气:&lt;/p&gt;&lt;span class=&quot;future-wea2&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;风向:&lt;/p&gt;&lt;span class=&quot;future-wind2&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;/div&gt;
+                    &lt;div class=&quot;col-md-2&quot;&gt;
+                        &lt;p&gt;日期:&lt;/p&gt;&lt;span class=&quot;future-date3&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;温度:&lt;/p&gt;&lt;span class=&quot;future-temp3&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;天气:&lt;/p&gt;&lt;span class=&quot;future-wea3&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;风向:&lt;/p&gt;&lt;span class=&quot;future-wind3&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;/div&gt;
+                    &lt;div class=&quot;col-md-2&quot;&gt;
+                        &lt;p&gt;日期:&lt;/p&gt;&lt;span class=&quot;future-date4&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;温度:&lt;/p&gt;&lt;span class=&quot;future-temp4&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;天气:&lt;/p&gt;&lt;span class=&quot;future-wea4&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;风向:&lt;/p&gt;&lt;span class=&quot;future-wind4&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;/div&gt;
+                    &lt;div class=&quot;col-md-2&quot;&gt;
+                        &lt;p&gt;日期:&lt;/p&gt;&lt;span class=&quot;future-date5&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;温度:&lt;/p&gt;&lt;span class=&quot;future-temp5&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;天气:&lt;/p&gt;&lt;span class=&quot;future-wea5&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;风向:&lt;/p&gt;&lt;span class=&quot;future-wind5&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;/div&gt;
+                    &lt;div class=&quot;col-md-2&quot;&gt;
+                        &lt;p&gt;日期:&lt;/p&gt;&lt;span class=&quot;future-date6&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;温度:&lt;/p&gt;&lt;span class=&quot;future-temp6&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;天气:&lt;/p&gt;&lt;span class=&quot;future-wea6&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;p&gt;风向:&lt;/p&gt;&lt;span class=&quot;future-wind6&quot;&gt;&lt;/span&gt;&lt;br&gt;
+                        &lt;/div&gt;
+
+                &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    height:100%;
+}
+body{
+    height: 100%;
+    overflow-x:hidden;
+}
+.container-fluid{
+    height: 100%;
+    background-color: white;
+}
+.row{
+    width:100%;
+}
+.title{
+    /*text-align:center;*/
+    margin: 0;
+}
+.header{
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    width: 400px;
+    /*left:400px;*/
+    top:10px;
+
+}
+a{
+    /*position: absolute;*/
+    display: inline-block;
+}
+h1{
+    display: inline;
+    margin: 0;
+    /*top: 5px;*/
+    position: absolute;
+    color: #ff9a03;
+}
+/*h4{*/
+    /*margin: 0;*/
+/*}*/
+/*.future{*/
+    /*text-align: center;*/
+/*}*/
+p{
+    display: inline-block;
+}
+
+.today span{
+    color: #ff9a03;
+}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    wx
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="170.html" title="front-end weather">170.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/09/front-end-random-quote-machine/" rel="next" title="front-end Random Quote Machine">
+                <i class="fa fa-chevron-left"></i> front-end Random Quote Machine
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/15/e8-80-83-e7-a0-94-e4-b9-8b-e8-b7-af-e6-ad-a3-e5-bc-8f-e5-bc-80-e5-90-af/" rel="prev" title="考研之路正式开启">
+                考研之路正式开启 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="wx">
+            
+              <p class="site-author-name" itemprop="name">wx</p>
+              <p class="site-description motion-element" itemprop="description">不想修空调的锅炉工不是好程序员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wx</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wwxin.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/09/front-end-weather/';
+          this.page.identifier = '2019/02/09/front-end-weather/';
+          this.page.title = 'front-end weather';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wwxin.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

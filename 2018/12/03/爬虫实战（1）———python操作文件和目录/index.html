@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近一个月都在考试，没有时间更新博客，但是还是一直在学习当中，最近看了别人的大量代码，有了一些自己的想法，在参照别人的思路的前提下，写了一个某度爬虫： 这个爬虫写了两个周吧，每个模块都调试了比较久，现在实现的功能有PPT，TXT，doc（但是doc是以txt保存的，没有保存格式，目前在想办法解决这个问题）。现在准备做一个GUI来结束这个爬虫，后续转弄机器学习了，在机器学习的同时写点小游戏。 之后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫实战（6）——某度文库">
+<meta property="og:url" content="http://yoursite.com/2018/12/03/爬虫实战（1）———python操作文件和目录/index.html">
+<meta property="og:site_name" content="Wastexin">
+<meta property="og:description" content="最近一个月都在考试，没有时间更新博客，但是还是一直在学习当中，最近看了别人的大量代码，有了一些自己的想法，在参照别人的思路的前提下，写了一个某度爬虫： 这个爬虫写了两个周吧，每个模块都调试了比较久，现在实现的功能有PPT，TXT，doc（但是doc是以txt保存的，没有保存格式，目前在想办法解决这个问题）。现在准备做一个GUI来结束这个爬虫，后续转弄机器学习了，在机器学习的同时写点小游戏。 之后">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-18T16:23:19.248Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬虫实战（6）——某度文库">
+<meta name="twitter:description" content="最近一个月都在考试，没有时间更新博客，但是还是一直在学习当中，最近看了别人的大量代码，有了一些自己的想法，在参照别人的思路的前提下，写了一个某度爬虫： 这个爬虫写了两个周吧，每个模块都调试了比较久，现在实现的功能有PPT，TXT，doc（但是doc是以txt保存的，没有保存格式，目前在想办法解决这个问题）。现在准备做一个GUI来结束这个爬虫，后续转弄机器学习了，在机器学习的同时写点小游戏。 之后">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/03/爬虫实战（1）———python操作文件和目录/">
+
+
+
+
+
+  <title>爬虫实战（6）——某度文库 | Wastexin</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<!--     <a href="https://github.com/Wastexin"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_white_ffffff.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a> -->
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wastexin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">真的锅炉工，假的程序员</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/03/爬虫实战（1）———python操作文件和目录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wastexin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫实战（6）——某度文库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T00:11:39+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-19T00:23:19+08:00">
+                2019-03-19
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/实战训练/" itemprop="url" rel="index">
+                    <span itemprop="name">实战训练</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/03/爬虫实战（1）———python操作文件和目录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/03/爬虫实战（1）———python操作文件和目录/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>最近一个月都在考试，没有时间更新博客，但是还是一直在学习当中，最近看了别人的大量代码，有了一些自己的想法，在参照别人的思路的前提下，写了一个某度爬虫： 这个爬虫写了两个周吧，每个模块都调试了比较久，现在实现的功能有PPT，TXT，doc（但是doc是以txt保存的，没有保存格式，目前在想办法解决这个问题）。现在准备做一个GUI来结束这个爬虫，后续转弄机器学习了，在机器学习的同时写点小游戏。 之后的头衔，机器学习学习者，独立游戏开发人。so,cool!</p>
+<pre><code>#!/usr/bin/python
+# -*- coding: utf-8 -*-
+&apos;&apos;&apos;
+@author: WeiXin
+&apos;&apos;&apos;
+
+import os
+from bs4 import BeautifulSoup
+import re
+import json
+import requests
+
+#创建基类
+class BaiduWk():
+    def __init__(self, url):
+        self.headers = {
+            &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) &apos;
+                          &apos;AppleWebKit/537.36 (KHTML, like Gecko) &apos;
+                          &apos;Chrome/70.0.3538.110 Safari/537.36&apos;,
+            &apos;charset&apos;:&apos;gb2312&apos;
+        }
+        self.url = url
+        self.title = None
+        self.doctype = None
+        self.get_response_sources(self.url)
+        self.get_doctype()
+        self.get_title()
+
+    def get_response_sources(self, url):
+        #异常处理
+        try:
+            response = requests.get(url, headers=self.headers)
+            #返回二进制文件content，text 再尝试
+            return response.content
+        except Exception:
+            print(Exception)
+            pass
+
+    def get_title(self):
+        try:
+            # 获取网页源代码
+            html = self.get_response_sources(self.url)
+            # 解析源码
+            content = html.decode(&apos;gbk&apos;)
+            # 使用beautifulsuop库进行解析
+            soup = BeautifulSoup(content, &apos;lxml&apos;)
+            #print(soup.title.string)
+            # 获取文档标题
+            self.title = soup.title.string
+            return self.title
+        except:
+            pass
+
+
+    def get_doctype(self):
+        try:
+            # 获取网页源代码
+            html = self.get_response_sources(self.url)
+            # 解析源码
+            content = html.decode(&apos;gbk&apos;)
+            # 使用正则表达式进行解析
+            # 获取文档标题
+            self.doctype = re.findall(r&quot;docType.*?\:.*?\&apos;(.*?)\&apos;\,&quot;,
+                                      content)[0] #非贪婪匹配  .*?非贪婪匹配 \, 匹配逗号
+                                                  # 括号中（.*?）为匹配的东西
+            #print(re.findall(r&quot;docType.*?\:.*?\&apos;(.*?)\&apos;\,&quot;, content)[0])
+            #print(self.doctype)
+        except:
+            pass
+
+class WKPpt(BaiduWk):
+    def __init__(self, url):
+        super().__init__(url)
+        self.images_url_list = list()
+        self.ppt_url = None
+        self.pptID = None
+
+    def get_ppt_ID(self):
+        #获取网页源代码
+        ppt_html = self.get_response_sources(self.url)
+        #解析源码
+        content = ppt_html.decode(&apos;gbk&apos;)
+        #使用正则表达式进行解析
+        self.pptID = re.findall(r&quot;docId.*?(\w{24}?)\&apos;\,&quot;, content)[0]
+        return self.pptID
+
+    def get_url(self):
+        #获取ID
+        self.get_ppt_ID()
+        #获取PPT列表的url
+        ppt_images_url = &apos;https://wenku.baidu.com/browse&apos; \
+                         &apos;/getbcsurl?doc_id=%s&amp;type=ppt&amp;&apos; \
+                         &apos;callback=wx&apos; % self.pptID
+        self.ppt_url = ppt_images_url
+        return self.ppt_url
+
+    def get_ppt_images(self):
+        # 获取url
+        self.get_url()
+        # 获取源码
+        ppt_source_html = self.get_response_sources(self.ppt_url).decode()
+        # 获取字符串类型的json数据
+        #ppt_images_json = ppt_source_html.decode()
+        # 使用正则表达式匹配需要的东西
+        ppt_url_str = re.match(r&apos;.*?\((.*?)\)&apos;, ppt_source_html).group(1)  # group(0)是原字符串
+                                                                # group(1)之后是正则之后获取的列表
+        # 将str转换成dict
+        #ppt_url_list = ppt_url_str.strip(&apos;,&apos;).split(&apos;,&apos;)
+        ppt_url_dict = json.loads(ppt_url_str)
+
+        # 遍历获得的dict
+        # 建立临时列表保存url
+        for url in ppt_url_dict[&apos;list&apos;]:
+            tem_url_list = list()
+            # 将image_url 和 image_page 保存到临时列表中
+            tem_url_list.append(url[&apos;zoom&apos;])
+            tem_url_list.append(url[&apos;page&apos;])
+            # 再将临时列表保存到self.images_url_list中
+            # 将每个image的url和page当做一个元素保存在其中
+            self.images_url_list.append(tem_url_list)
+
+        # 保存文件
+        try:
+            os.makedirs(&quot;./ppt/%s&quot; % self.title)
+        except Exception as e:
+            print(e)
+
+        length = len(self.images_url_list)
+        for image_url in self.images_url_list:
+            #print(&quot;一共%d页，正在下载第%d页。&quot;) % (image_url[&apos;page&apos;], length)
+            ppt_image = self.get_response_sources(image_url[0])
+            path = &apos;./ppt/%s/%s_%d%s&apos; % (self.title, self.title, image_url[1], &apos;.jpg&apos;)
+            with open(path, &apos;wb&apos;) as  f:
+                f.write(ppt_image)
+        print(&quot;下载完成&quot;)
+
+
+class WKDoc(BaiduWk):
+    def __init__(self, url):
+        super().__init__(url)
+        # 用列表保存网站源代码中的url
+        self.doc_url_list = list()
+
+    def get_doc_urls(self):
+        # 获取网站源代码,返回response.content
+        doc_source_html = self.get_response_sources(self.url)
+        # 进行解码
+        doc_html_content = doc_source_html.decode(&apos;unicode_escape&apos;) #Unicode解码中文
+        # 使用正则表达式获取源码中的doc_url(一系列json请求的代码)
+        all_url = re.findall(r&apos;wkbjbos\.bdimg\.com.*?json.*?expire.*?\}&apos;, doc_html_content)
+        url_list = list()
+        # 获取doc_title
+        self.title = self.get_title()
+        # 对all_url中的进行处理,将获得的url存入url_list中
+        for url in all_url:
+            url = &quot;https://&quot; + url.replace(&quot;\\\\&quot;, &quot;&quot;)
+            url_list.append(url)
+        # 将url_list保存到self.doc_url_list中
+        self.doc_url_list = url_list
+        #return url_list
+
+    def get_save_doc_content(self, url_list):
+        doc_content = &quot;&quot;
+        #temp_content = &quot;&quot;
+        #从url_list中开始下载
+        for url in url_list:
+            try:
+                # 获取source_html
+                # 使用unicode_escape进行Unicode解码
+                html_content = doc.get_response_sources(url[:-2]).decode()
+                # print(html_content) &apos;unicode_escape&apos;
+                # 使用正则表达式进行选择
+                content = re.match(r&apos;.*?\((.*)\)$&apos;, html_content).group(1)
+                # 将获得的str转成dict
+                all_body_info = json.loads(content)
+                for body_info in all_body_info[&quot;body&quot;]:
+                    try:
+                        # 从all_body_info中逐条获取数据
+                        if type(body_info[&quot;c&quot;]) == dict:
+                            continue
+                        doc_content = doc_content + body_info[&quot;c&quot;].strip()
+                        #doc_content = doc_content + body_info[&quot;c&quot;]
+                        # 是否可以保持格式
+                    except Exception as e:
+                        print(e)
+            except Exception as e:
+                print(e)
+        # doc_content = doc_content.encode()
+        # doc_content = doc_content.decode(&apos;GBK&apos;)
+        doc_content.encode(&apos;gbk&apos;)
+        # print(doc_content)
+        # 创建目录进行保存
+        try:
+            path = &quot;./doc/%s&quot; % self.title
+            os.makedirs(path)
+        except:
+            pass
+        #创建文件保存
+        try:
+            filename = self.title + &apos;.txt&apos;
+            with open(&quot;./doc/%s/%s&quot; %(self.title, filename), &apos;w&apos;, encoding=&quot;gbk&quot;) as f :
+                f.write(doc_content)
+            #print(f.encoding)
+        except:
+            pass
+
+
+
+
+
+class WKTxt(BaiduWk):
+    def __init__(self, url):
+        super().__init__(url)
+        self.txtID = None
+
+    def get_txt(self):
+        # 获取网页源代码
+        txt_html = self.get_response_sources(self.url)
+        # 解析源码
+        content = txt_html.decode(&apos;gbk&apos;)
+        # 使用正则表达式进行解析
+        self.txtID = re.findall(r&quot;docId.*?(\w{24}?)\&apos;\,&quot;, content)[0]
+        # 拼接url
+        pre_txt_url = &quot;https://wenku.baidu.com/api/doc/getdocinfo?callback=cb&amp;doc_id=&quot; + self.txtID
+        # 再次请求
+        first_json = self.get_response_sources(pre_txt_url).decode()
+        str_first_json = re.match(r&apos;.*?\((\{.*?\})\).*&apos;, first_json).group(1)
+        # print(str_first_json)
+        the_first_json = json.loads(str_first_json)
+        md5sum = the_first_json[&quot;md5sum&quot;]
+        rn = the_first_json[&quot;docInfo&quot;][&quot;totalPageNum&quot;]
+        rsign = the_first_json[&quot;rsign&quot;]
+        # 请求目标url
+        target_url = &quot;https://wkretype.bdimg.com/retype/text/&quot; + self.txtID \
+                     + &quot;?&quot; + md5sum + &quot;&amp;callback=cb&quot; + &quot;&amp;pn=1&amp;rn=&quot; + rn \
+                     + &quot;&amp;type=txt&quot; + &quot;&amp;rsign=&quot; + rsign
+
+
+        sec_json = self.get_response_sources(target_url).decode(&apos;GBK&apos;)
+        str_sec_json = re.match(r&apos;.*?\(\[(.*)\]\)$&apos;, sec_json).group(1)
+        str_sec_json += &quot;,&quot;
+        str_json_list = str_sec_json.split(&apos;},&apos;)
+        result_txt = &quot;&quot;
+        # 截取尾部空格
+        str_json_list = str_json_list[:-1]
+        for str_json in str_json_list:
+            str_json += &quot;}&quot;
+            pure_dic = json.loads(str_json)
+            pure_txt = pure_dic[&quot;parags&quot;][0][&quot;c&quot;].strip()
+            result_txt += pure_txt
+
+        # 创建文件目录
+        try:
+            path = &quot;.&quot; + os.sep + self.doctype
+            os.makedirs(path)
+        except Exception as e:
+            pass
+        # 创建文件,保存信息
+        try:
+            file_name = &quot;.&quot; + os.sep + self.doctype + os.sep + self.title + &quot;.txt&quot;
+            with open(file_name, &apos;w&apos;) as f:
+                f.write(result_txt)
+                print(&quot;已经保存为:&quot;, self.title + &apos;.txt&apos;)
+        except Exception as e:
+            # print(e)
+            pass
+
+url = &quot;https://wenku.baidu.com/view/4513c9283169a4517723a355.html?from=search&quot;
+doc = WKDoc(url)
+doc.get_doc_urls()
+doc_urls = doc.doc_url_list
+doc.get_save_doc_content(doc.doc_url_list)
+#print(doc.title)
+#doc.get_save_doc_content(doc_urls)
+</code></pre></blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    wx
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="145.html" title="爬虫实战（6）——某度文库">145.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/04/数据结构———栈/" rel="next" title="数据结构———栈">
+                <i class="fa fa-chevron-left"></i> 数据结构———栈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/03/爬虫实战（6）——某度文库/" rel="prev" title="爬虫实战（6）——某度文库">
+                爬虫实战（6）——某度文库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="wx">
+            
+              <p class="site-author-name" itemprop="name">wx</p>
+              <p class="site-description motion-element" itemprop="description">不想修空调的锅炉工不是好程序员</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wx</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wwxin.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/12/03/爬虫实战（1）———python操作文件和目录/';
+          this.page.identifier = '2018/12/03/爬虫实战（1）———python操作文件和目录/';
+          this.page.title = '爬虫实战（6）——某度文库';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wwxin.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
